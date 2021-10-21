@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html class="js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Set up Poll</title>
+	<link rel="icon" href="http://first_one.surge.sh/images/icon.png" type="image/x-icon">
+	<script src="./Set up Poll_files/sweetalert.min.js"></script>
+	<link href="./Set up Poll_files/sweetalert.min.css" rel="stylesheet">
+	<!-- <script>
+		window.onload = function(){
+			if(!sessionStorage.token){
+				window.location.href = "Main.html";
+			}
+		}
+	</script> -->
+	<style type="text/css">
+		@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
+		body {
+			background: linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%);
+
+		}
+
+		.form-style-10 {
+			width: 450px;
+			padding: 30px;
+			margin: 40px auto;
+			background: #FFF;
+			border-radius: 10px;
+			-webkit-border-radius: 10px;
+			-moz-border-radius: 10px;
+			box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-moz-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+			-webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.13);
+		}
+
+		.form-style-10 .inner-wrap {
+			padding: 30px;
+			background: #F8F8F8;
+			border-radius: 6px;
+			margin-bottom: 15px;
+		}
+
+		.form-style-10 h1 {
+			background: #ff1a75;
+			padding: 20px 30px 15px 30px;
+			margin: -30px -30px 30px -30px;
+			border-radius: 10px 10px 0 0;
+			-webkit-border-radius: 10px 10px 0 0;
+			-moz-border-radius: 10px 10px 0 0;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'lato', serif;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			border: 1px solid #99003d;
+		}
+
+		.form-style-10 h1>span {
+			display: block;
+			margin-top: 2px;
+			font: 13px Arial, Helvetica, sans-serif;
+		}
+
+		.form-style-10 label {
+			display: block;
+			font: 13px Arial, Helvetica, sans-serif;
+			color: #888;
+			margin-bottom: 15px;
+		}
+
+		.form-style-10 input[type="text"],
+		.form-style-10 input[type="date"],
+		.form-style-10 input[type="datetime"],
+		.form-style-10 input[type="email"],
+		.form-style-10 input[type="number"],
+		.form-style-10 input[type="search"],
+		.form-style-10 input[type="time"],
+		.form-style-10 input[type="url"],
+		.form-style-10 input[type="password"],
+		.form-style-10 textarea,
+		.form-style-10 select {
+			display: block;
+			box-sizing: border-box;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			width: 100%;
+			padding: 8px;
+			border-radius: 6px;
+			-webkit-border-radius: 6px;
+			-moz-border-radius: 6px;
+			border: 2px solid #fff;
+			box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+			-moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+			-webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+		}
+
+		.form-style-10 .section {
+			font: normal 20px 'lato', serif;
+			color: #ff1a75;
+			margin-bottom: 5px;
+		}
+
+		.form-style-10 .section span {
+			background: #e91e63;
+			padding: 5px 10px 5px 10px;
+			position: absolute;
+			border-radius: 50%;
+			-webkit-border-radius: 50%;
+			-moz-border-radius: 50%;
+			border: 4px solid #fff;
+			font-size: 14px;
+			margin-left: -45px;
+			color: #fff;
+			margin-top: -3px;
+		}
+
+		.form-style-10 input[type="button"],
+		.form-style-10 input[type="submit"] {
+			background: #ff1a75;
+			padding: 8px 20px 8px 20px;
+			border-radius: 5px;
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			color: #fff;
+			text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+			font: normal 30px 'lato', serif;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
+			border: 1px solid #99003d;
+			font-size: 15px;
+		}
+
+		.form-style-10 input[type="button"]:hover,
+		.form-style-10 input[type="submit"]:hover {
+			background: #99003d;
+			-moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+			-webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+			box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+		}
+
+		.form-style-10 .privacy-policy {
+			float: right;
+			width: 250px;
+			font: 12px Arial, Helvetica, sans-serif;
+			color: #4D4D4D;
+			margin-top: 10px;
+			text-align: right;
+		}
+
+		h1 {
+			background: linear-gradient(to left, #e91e63 0%, #e91e63 20%, #f44336 70%) !important;
+		}
+
+		#submit_btn {
+			background: linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%) !important;
+			border: none !important;
+			padding: 10px 20px !important;
+			border-radius: 50px !important;
+			font-size: 16px !important;
+			border: 1px solid #e91e63 !important;
+		}
+
+		#submit_btn:hover {
+			background: white !important;
+			color: #e91e63 !important;
+			cursor: pointer;
+		}
+
+		* {
+			font-family: 'lato';
+		}
+
+		.form-style-10 #submit_btn {
+			position: relative !important;
+			left: 180px !important;
+		}
+
+		.input-file-container {
+			position: relative;
+			width: 150px;
+		}
+
+		.js .input-file-trigger {
+			display: block;
+			padding: 14px 10px;
+			background: #e91e63;
+			color: #fff;
+			font-size: 15px;
+			transition: all .4s;
+			cursor: pointer;
+			border: 1px solid white;
+			padding-left: 30px !important;
+		}
+
+		.js .input-file {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 225px;
+			opacity: 0;
+			padding: 14px 0;
+			cursor: pointer;
+		}
+
+		.js .input-file:hover+.input-file-trigger,
+		.js .input-file:focus+.input-file-trigger,
+		.js .input-file-trigger:hover,
+		.js .input-file-trigger:focus {
+			background: #fff;
+			color: #e91e63;
+			border: 1px solid #e91e63;
+		}
+	</style>
+</head>
+
+<body data-gr-c-s-loaded="true">
+	<div class="form-style-10">
+		<h1>Create your Voting Poll now!<span>Enter your details here</span></h1>
+		<form name="create-poll" data-netlify-recaptcha="true" data-netlify="true" id="create-poll">
+			<div class="section"><span>1</span>Your organization details</div>
+			<div class="inner-wrap">
+				<label>Your Full Name <input type="text" name="name"></label>
+				<label>Your organization name <textarea name="organizationName"></textarea></label>
+			</div>
+
+			<div class="section"><span>2</span>Your Contact Info</div>
+			<div class="inner-wrap">
+				<label>Email Address <input type="email" name="email"></label>
+				<label>Phone Number <input type="text" name="mobile"></label>
+			</div>
+
+			<div class="section"><span>3</span>Personal Information</div>
+			<div class="inner-wrap">
+				<div class="input-file-container">
+					<input class="input-file" id="photo" type="file" name="field5">
+					<label tabindex="0" for="my-file" class="input-file-trigger">Select photo</label>
+				</div>
+				<label>About <textarea name="about" id="about"></textarea></label>
+				<div data-netlify-recaptcha="true"></div>
+			</div>
+
+			<div class="button-section">
+				<input type="submit" id="submit_btn" name="submit" value="Submit" onclick="validate()">
+			</div>
+		</form>
+	</div>
+	<!-- <script src="./Set up Poll_files/jquery.js"></script>
+	<script type="text/javascript">
+
+		function validate() {
+			var x = document.forms[0][0].value;
+			var y = document.forms[0][1].value;
+			var z = document.forms[0][2].value;
+			var a = document.forms[0][3].value;
+			var f = document.querySelector('#photo');
+			var about = document.querySelector('#about').value;
+			var f = document.querySelector('#photo');
+			var atpos = z.indexOf("@");
+			var dotpos = z.lastIndexOf(".");
+			if (x == null || x == "") {
+				console.log(x)
+				alert('Name cannot be blank')
+			} else if (y == null || y == "") {
+				alert("Organization Name cannot be blank");
+			} else if (atpos < 1 || dotpos < atpos + 2 || dotpos + 2 >= z.length) {
+				alert("Please enter a valid email id");
+
+			} else if (a == "" || a.length < 10) {
+				alert("Please enter a 10 digit mobile number");
+
+			} else if(f.files.length == 0 ){ 
+                alert("No photo selected"); 
+            } else if(about == null || about == ""){
+				alert('About cannot be blank')
+			}
+		}
+
+		document.querySelector("html").classList.add('js');
+		document
+        .getElementById("create-poll")
+        .addEventListener("submit", function (event) {
+		  event.preventDefault();
+		  var formdata = new FormData()
+		  var x = document.forms[0][0].value;
+			var y = document.forms[0][1].value;
+			var z = document.forms[0][2].value;
+			var a = document.forms[0][3].value;
+			var f = document.querySelector('#photo');
+			var about = document.querySelector('#about').value;
+			var f = document.querySelector('#photo');
+		  formdata.append('name',x);
+			formdata.append('organizationName',y)
+			formdata.append('email',z)
+			formdata.append('mobile',a)
+			formdata.append('about',about)
+			formdata.append('image',f.files[0])
+			console.log(formdata)
+          $.ajax({
+            method: "POST",
+            url: "https://iwp-project-backend.herokuapp.com/candidate/signup",
+            data: formdata,
+			contentType:false,
+			processData: false,
+			headers: {
+    "Authorization": sessionStorage.token
+  },
+            statusCode:{
+              404: function(xhr){
+                const data = JSON.parse(xhr.responseText)
+                alert(data.message)
+              }
+            },
+            success: function (data) {
+			  alert("Candidate Registration Successful");
+			  window.location = '../Module3/ChooseDropCreate.htm';
+            },
+            error: function (err) {
+              console.log(err);
+            },
+          })
+        });
+
+		// var fileInput = document.querySelector(".input-file"),
+		// 	button = document.querySelector(".input-file-trigger"),
+
+		// button.addEventListener("keydown", function (event) {
+		// 	if (event.keyCode == 13 || event.keyCode == 32) {
+		// 		fileInput.focus();
+		// 	}
+		// });
+		// button.addEventListener("click", function (event) {
+		// 	fileInput.focus();
+		// 	return false;
+		// });
+
+	</script> -->
+</body></html>

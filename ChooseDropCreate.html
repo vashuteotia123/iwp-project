@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="http://first_one.surge.sh/images/icon.png"
+      type="image/x-icon"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- <link
+      rel="stylesheet"
+      href="./ChooseDropCreate_files/font-awesome.min.css"
+    /> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script src="../Module5/Set up Poll_files/jquery.js"></script>
+    <!-- <script>
+      window.onload = function(){
+        if(!sessionStorage.token){
+          window.location.href = "../Module1/Main.html";
+        }
+      }
+    </script> -->
+    <title>Document</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css?family=Alegreya+Sans:900");
+      @import url("https://fonts.googleapis.com/css?family=Cookie|Fredoka+One|Montserrat&display=swap");
+
+      body {
+        align-items: center;
+        display: flex;
+        height: 100vh;
+        justify-content: center;
+        font-family: sans-serif;
+        margin: 0;
+        background: linear-gradient(
+          to right,
+          #e91e63 0%,
+          #e91e63 20%,
+          #f44336 70%
+        );
+      }
+
+      @media (max-width: 767px) {
+        body {
+          display: block;
+        }
+      }
+
+      .card {
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19),
+          0 6px 6px rgba(0, 0, 0, 0.23);
+        cursor: pointer;
+        height: 200px;
+        margin: 40px;
+        margin-top: 100px;
+        padding: 0 20px;
+        position: relative;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.025);
+        text-align: center;
+        transition: height 1000ms;
+        width: 200px;
+      }
+
+      @media (max-width: 767px) {
+        .card {
+          left: calc(50% - 20px);
+          transform: translateX(-50%);
+        }
+      }
+
+      .card.expanded {
+        height: 300px;
+      }
+
+      .label {
+        margin-top: 30px;
+        transform: translateY(10px);
+        transition: transform 1000ms;
+      }
+
+      .card.expanded .label {
+        transform: translateY(0);
+      }
+
+      .text1 {
+        clip-path: polygon(0% 100%, 0 -90%, 50% -5%, 100% -90%, 100% 100%);
+        -webkit-clip-path: polygon(
+          0% 100%,
+          0 -90%,
+          50% -5%,
+          100% -90%,
+          100% 100%
+        );
+        transition: clip-path 1000ms;
+      }
+
+      .card.expanded .text1 {
+        clip-path: polygon(0% 100%, 0 -100%, 50% -15%, 100% -100%, 100% 100%);
+        -webkit-clip-path: polygon(
+          0% 100%,
+          0 -100%,
+          50% -15%,
+          100% -100%,
+          100% 100%
+        );
+      }
+
+      .text2 {
+        clip-path: polygon(
+          0% 100%,
+          0% -80%,
+          15% -70%,
+          17.23% -53.59%,
+          23% -40%,
+          27.23% -28.94%,
+          35% -20%,
+          41.09% -13.59%,
+          50% -10%,
+          58.91% -13.23%,
+          65% -20%,
+          72.77% -28.23%,
+          77% -40%,
+          82.77% -54.65%,
+          85% -70%,
+          100% -80%,
+          100% 100%
+        );
+        -webkit-clip-path: polygon(
+          0% 100%,
+          0% -80%,
+          15% -70%,
+          17.23% -53.59%,
+          23% -40%,
+          27.23% -28.94%,
+          35% -20%,
+          41.09% -13.59%,
+          50% -10%,
+          58.91% -13.23%,
+          65% -20%,
+          72.77% -28.23%,
+          77% -40%,
+          82.77% -54.65%,
+          85% -70%,
+          100% -80%,
+          100% 100%
+        );
+        transition: clip-path 1000ms;
+      }
+
+      .card.expanded .text2 {
+        clip-path: polygon(
+          0% 100%,
+          0% -90%,
+          15% -80%,
+          17.23% -63.59%,
+          23% -50%,
+          27.23% -38.94%,
+          35% -30%,
+          41.09% -23.59%,
+          50% -20%,
+          58.91% -23.23%,
+          65% -30%,
+          72.77% -38.23%,
+          77% -50%,
+          82.77% -64.65%,
+          85% -80%,
+          100% -90%,
+          100% 100%
+        );
+        -webkit-clip-path: polygon(
+          0% 100%,
+          0% -90%,
+          15% -80%,
+          17.23% -63.59%,
+          23% -50%,
+          27.23% -38.94%,
+          35% -30%,
+          41.09% -23.59%,
+          50% -20%,
+          58.91% -23.23%,
+          65% -30%,
+          72.77% -38.23%,
+          77% -50%,
+          82.77% -64.65%,
+          85% -80%,
+          100% -90%,
+          100% 100%
+        );
+      }
+
+      .text-content {
+        transform: translateY(-160px);
+        transition: transform 1000ms;
+      }
+
+      .card.expanded .text-content {
+        transform: translateY(-15px);
+      }
+
+      .chevron {
+        position: absolute;
+        bottom: 20px;
+        left: calc(50% - 15px);
+        transform-origin: 50%;
+        transform: rotate(180deg);
+        transition: transform 1000ms;
+      }
+
+      .card.expanded .chevron {
+        transform: rotate(0deg);
+      }
+
+      .title {
+        font-family: "Alegreya Sans", sans-serif;
+        font-weight: 900;
+        margin: 20px 0 12px;
+      }
+
+      .body-text {
+        padding: 0 20px;
+      }
+
+      .back {
+        position: absolute;
+        top: 120px;
+        left: 220px;
+      }
+
+      .back:hover {
+        cursor: pointer;
+      }
+
+      .btn .results {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 10px 20px;
+        font-size: 20px;
+        background: #fff;
+        border: 2px solid #fff;
+        color: #e91e63;
+        transition: all 0.3s ease 0s;
+      }
+
+      .results:hover {
+        box-shadow: 0px 15px 20px rgba(255, 255, 255, 0.4);
+        color: #e91e63;
+        transform: translateX(-50%);
+        cursor: pointer;
+        top: calc(80% - 7px);
+      }
+    </style>
+  </head>
+
+  <body data-gr-c-s-loaded="true">
+    <a href="../Module2/LoginSingUp.html"><i class="fa fa-angle-left back" style="font-size:60px; color: white;"> </i></a>
+    
+    <h1
+      style="
+        position: absolute;
+        top: 60px;
+        color: white;
+        font-family: Montserrat;
+        font-size: 70px;
+      "
+    >
+      Choose one option
+    </h1>
+
+    <div class="card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <h1 style="margin-top: 80px">
+        <a
+          href="../Module3/ChooseDropCreate.htm#"
+          style="text-decoration: none; color: #000"
+          id="drop"
+          >DROP</a
+        >
+      </h1>
+      <div class="text1">
+        <div class="text-content">
+          <h1 class="title" style="margin-top: 40px">Vote</h1>
+          <div class="body-text">click button to vote</div>
+        </div>
+      </div>
+      <svg
+        class="chevron"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 35"
+        width="30"
+      >
+        <path
+          d="M5 30L50 5l45 25"
+          fill="none"
+          stroke="#000"
+          stroke-width="5"
+        ></path>
+      </svg>
+    </div>
+    <div class="card" onclick="this.classList.toggle(&#39;expanded&#39;)">
+      <h1 style="margin-top: 80px">
+        <a
+          href="../Module3/ChooseDropCreate.htm#"
+          style="text-decoration: none; color: #000"
+          id="create"
+          >CREATE</a
+        >
+      </h1>
+      <div class="text2">
+        <div class="text-content">
+          <h1 class="title" style="margin-top: 40px">Poll</h1>
+          <div class="body-text">click button to create</div>
+        </div>
+      </div>
+      <svg
+        class="chevron"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 100 35"
+        width="30"
+      >
+        <path
+          d="M5 30L50 5l45 25"
+          fill="none"
+          stroke="#000"
+          stroke-width="5"
+        ></path>
+      </svg>
+    </div>
+
+    <div class="btn">
+      <button class="results">Check out Results now!</button>
+    </div>
+
+    <!-- <script>
+      document.querySelector(".results").addEventListener("click", function () {
+        $.ajax({
+          method : 'GET',
+          url : 'https://iwp-project-backend.herokuapp.com/vote/count',
+          headers: {
+            "Authorization": sessionStorage.token
+          },
+          statusCode : {
+            401 : function(data){
+              alert(data.message)
+            }
+          },
+          success : function(data){
+            sessionStorage['results']= JSON.stringify(data)
+            window.location.href = "../Module6/Results.htm";
+          },
+          error : function(err){
+            alert('err')
+          }
+        })
+      });
+
+      var signup_data = {};
+
+      document.querySelector("i").addEventListener("click", function () {
+        setTimeout(() => {
+          window.location.href = "../Module1/Main.html";
+        }, 1000);
+      });
+
+      var create = document.querySelector("#create");
+      var drop = document.querySelector("#drop");
+
+      create.addEventListener("click", function () {
+
+        window.location.href = "../Module5/Set up Poll.htm";
+      });
+
+      drop.addEventListener("click", function () {
+        $.ajax({
+          method : 'GET',
+          url : 'https://iwp-project-backend.herokuapp.com/candidates',
+          headers: {
+    "Authorization": sessionStorage.token
+          },
+          statusCode : {
+            401 : function(data){
+              alert(data.message)
+            }
+          },
+          success : function(data){
+            sessionStorage['candidateData']= JSON.stringify(data)
+            window.location.href = "../Module4/CasteVote.htm";
+          },
+          error : function(err){
+            alert('err')
+          }
+        })
+      });
+    </script> -->
+  </body>
+</html>

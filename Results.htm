@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="http://first_one.surge.sh/images/icon.png" type="image/x-icon">
+    <title>Document</title>
+    <!-- <script>
+		window.onload = function(){
+			if(!sessionStorage.token){
+				window.location.href = "../Module1/Main.html";
+			}
+		}
+	</script> -->
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Electrolize&display=swap');
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+    * {
+        margin: 0;
+        padding: 0;
+        font: inherit;
+        border: 0;
+        font-size: 100%;
+        vertical-align: baseline;
+        font-family: 'Electrolize', sans-serif;
+    }
+
+    body {
+        color: #212121;
+        -webkit-font-smoothing: antialiased;
+        padding: 2%;
+        line-height: 1;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-weight: bolder;
+        text-align: center;
+        font-size: 1.5em;
+        padding: .5em 0;
+        margin-bottom: 1em;
+        border-bottom: 2px solid #212121;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+    }
+
+    .wrap {
+        width: 50%;
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .bar {
+        background: #e91e63;
+        width: 0;
+        margin: .25em 0;
+        color: #fff;
+        position: relative;
+        transition: width 2s, background .2s;
+        -webkit-transform: translate3d(0, 0, 0);
+        clear: both;
+    }
+
+    .bar:nth-of-type(odd) {
+        background: #ff6461;
+    }
+
+    .bar .label {
+        font-size: 1.2em;
+        padding: 1em;
+        background: #212121;
+        width: 7em;
+        display: inline-block;
+        position: relative;
+        z-index: 2;
+        font-weight: bold;
+    }
+
+    .bar .label.second {
+        background: #333;
+    }
+
+    .count {
+        position: absolute;
+        right: .25em;
+        top: .75em;
+        padding: .15em;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
+
+    #particles-js {
+        opacity: 0.5;
+    }
+
+    .back {
+        border-radius: 20px;
+        padding: 10px 20px;
+        font-family: 'Open sans',sans-serif;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        margin-top: 20px;
+        background: linear-gradient(to right, #e91e63 0%, #e91e63 20%, #f44336 70%);
+        color: white;
+        border: 1px solid #e91e63;
+        z-index: 1;
+    }
+
+    .back:hover {
+        cursor: pointer;
+        background: white;
+        color: #e91e63;
+        font-weight: bold;
+    }
+</style></head>
+
+
+
+<body data-gr-c-s-loaded="true">
+    <div id="particles-js"><canvas class="particles-js-canvas-el" width="1728" height="864" style="width: 100%; height: 100%;"></canvas></div>
+    <div class="wrap">
+        <h1>Election Results</h1>
+        <div class="holder">
+        
+        </div>
+        <div class="back-btn">
+            <button class="back">Logout</button>
+        </div>
+    </div>
+
+    <script src="./Results_files/particles.min.js"></script>
+
+    <script src="./Results_files/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+    <script>
+        let totalVote =0
+        const results = JSON.parse(sessionStorage['results']).message
+        for(i=0;i<results.length;i++){
+            totalVote = totalVote + results[i].voteCount
+        }
+        console.log(totalVote)
+        for(i =0 ; i<results.length ; i++ ){
+            document.querySelector('.holder').insertAdjacentHTML(
+                'afterbegin',
+                `<div class="bar" data-percent="${(results[i].voteCount/totalVote)*100}%" style="width: ${(results[i].voteCount/totalVote)*100}%;"><span class="label">${results[i].name}</span><span class="count">${(results[i].voteCount/totalVote)*100}%</span></div>`
+            )
+        }
+
+        document.querySelector('.back').addEventListener("click", ()=>{
+            sessionStorage.clear()
+            window.location.href = "../Module2/LoginSingUp.html";
+        })
+
+        setTimeout(function start() {
+            $('.bar').each(function (i){
+                var $bar = $(this);
+                $(this).append('<span class="count"></span>')
+                setTimeout(function () {
+                    $bar.css('width', $bar.attr('data-percent'));
+                }, i * 100);
+            });
+
+            $('.count').each(function(){
+                $(this).prop('Counter',0).animate({
+                    Counter: $(this).parent('.bar').attr('data-percent')
+                },{
+                    duration: 2000,
+                    easing: 'swing',
+                    step: function (now) {
+                        $(this).text(Math.ceil(now) +'%');
+                    }
+                });
+            });
+
+        },500)
+
+        // particles.js config
+
+        const particlesJSON = {
+    "particles": {
+        "number": {
+            "value": 40,
+            "density": {
+                "enable": true,
+                "value_area": 500
+            }
+        },
+        "color": {
+            "value": "#e91e63"
+        },
+        "shape": {
+            "type": "polygon",
+            "stroke": {
+                "width": 2,
+                "color": "#e91e63"
+            },
+            "polygon": {
+                "nb_sides": 6
+            },
+            "image": {
+                "src": "img/github.svg",
+                "width": 100,
+                "height": 100
+            }
+        },
+        "opacity": {
+            "value": 0.5,
+            "random": true
+        },
+        "size": {
+            "value": 10,
+            "random": true
+        },
+        "line_linked": {
+            "enable": false,
+            "distance": 200,
+            "color": "#e91e63",
+            "opacity": 0.3,
+            "width": 2
+        },
+        "move": {
+            "enable": true,
+            "speed": 5,
+            "direction": "bottom",
+            "random": true,
+            "straight": true,
+            "out_mode": "out",
+            "bounce": false,
+            "attract": {
+                "enable": false,
+                "rotateX": 600,
+                "rotateY": 1200
+            }
+        }
+    },
+    "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+            "onhover": {
+                "enable": true,
+                "mode": [
+                    "grab",
+                    "bubble"
+                ]
+            },
+            "onclick": {
+                "enable": true,
+                "mode": "push"
+            },
+            "resize": true
+        },
+        "modes": {
+            "grab": {
+                "distance": 400,
+                "line_linked": {
+                    "opacity": 0.7
+                }
+            },
+            "bubble": {
+                "distance": 600,
+                "size": 12,
+                "duration": 1,
+                "opacity": 0.8,
+                "speed": 2
+            },
+            "repulse": {
+                "distance": 400,
+                "duration": 0.4
+            },
+            "push": {
+                "particles_nb": 20
+            },
+            "remove": {
+                "particles_nb": 10
+            }
+        }
+    },
+    "retina_detect": true
+}
+
+particlesJS("particles-js", particlesJSON)
+
+    </script>
+
+
+</body></html>

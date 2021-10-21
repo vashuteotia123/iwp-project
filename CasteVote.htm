@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="icon" href="http://first_one.surge.sh/images/icon.png" type="image/x-icon">
+    <link rel="stylesheet" href="./CasteVote_files/main.css">
+    <link rel="stylesheet" href="./CasteVote_files/bootstrap.min.css">
+    <script src="./CasteVote_files/jquery.js"></script>
+    <script src="./CasteVote_files/sweetalert.min.js"></script>
+    <!-- <script>
+		window.onload = function(){
+			if(!sessionStorage.token){
+				window.location.href = "../Module1/Main.html";
+			}
+		}
+	</script> -->
+    <link href="./CasteVote_files/sweetalert.min.css" rel="stylesheet">
+<style>
+    
+</style></head>
+
+
+
+<body data-gr-c-s-loaded="true">
+    <section class="container">
+        <div class="page-header">
+            <h1>Choose your representative<br>
+                <small>Click to drop vote</small></h1>
+        </div>
+        <div class="row active-with-click">
+            
+            </div>
+            
+
+    </div></section>
+
+
+<script>
+    const candidates = JSON.parse(sessionStorage['candidateData']).candidates
+    console.log(typeof(candidates))
+    for(i =0 ; i<candidates.length ; i++ ){
+        document.querySelector('.active-with-click').insertAdjacentHTML(
+    'afterbegin',
+    `<div class="col-md-4 col-sm-6 col-xs-12">
+                <article class="material-card Blue">
+                    <h2>
+                        <span>${candidates[i].name}</span>
+                        <strong>
+                            <i class="fa fa-fw fa-star"></i>
+                            ${candidates[i].organizationName}
+                        </strong>
+                    </h2>
+                    <div class="mc-content">
+                        <div class="img-container">
+                            <img class="img-responsive" src="${candidates[i].image}">
+                        </div>
+                        <div class="mc-description">
+                            ${candidates[i].about}
+                        </div>
+                    </div>
+                    <a class="mc-btn-action">
+                        <i class="fa fa-bars"></i>
+                    </a>
+                    <div class="mc-footer">
+                        <h4>
+                            Social
+                        </h4>
+                        <a class="fa fa-fw fa-facebook"></a>
+                        <a class="fa fa-fw fa-twitter"></a>
+                        <a class="fa fa-fw fa-linkedin"></a>
+                        <a class="fa fa-fw fa-google-plus"></a>
+                    </div>
+                </article>
+            </div>`    
+  )
+    }
+    $(function () {
+        $('.material-card > .mc-btn-action').click(function () {
+            var card = $(this).parent('.material-card');
+            var icon = $(this).children('i');
+            icon.addClass('fa-spin-fast');
+
+            if (card.hasClass('mc-active')) {
+                card.removeClass('mc-active');
+
+                window.setTimeout(function () {
+                    icon
+                        .removeClass('fa-arrow-left')
+                        .removeClass('fa-spin-fast')
+                        .addClass('fa-bars');
+
+                }, 800);
+            } else {
+                card.addClass('mc-active');
+
+                window.setTimeout(function () {
+                    icon
+                        .removeClass('fa-bars')
+                        .removeClass('fa-spin-fast')
+                        .addClass('fa-arrow-left');
+
+                }, 800);
+            }
+        });
+    });
+
+    $('.img-responsive').click(function () {
+        console.log($(this)[0].parentElement.parentElement.parentElement.querySelector('article>h2>span').innerHTML)
+        const name =  $(this)[0].parentElement.parentElement.parentElement.querySelector('article>h2>span').innerHTML
+        var email
+        for(var i=0; i<candidates.length; i++) {
+	        if(candidates[i].name == name) {
+                email = candidates[i].email
+		        break;
+	        }
+        }
+    //     $.ajax({
+    //         method:"POST",
+    //         url:"https://iwp-project-backend.herokuapp.com/vote",
+    //         headers: {
+    //             "Authorization": sessionStorage.token
+    //         },
+    //         data:{ email},
+    //         success:function(data){
+    //             swal({
+    //                 position: 'middle',
+    //                 type: 'success',
+    //                 title: 'Your vote has been successfully recorded.',
+    //                 showConfirmButton: false,
+    //                 timer: 5000
+    //             })
+    //         },
+    //         error:function(err){
+    //             console.log(err)
+    //         }
+    //     })
+    //     setTimeout(function change(){ window.location = '../Module3/ChooseDropCreate.htm'; }, 5000);
+        
+    // });
+</script> 
+
+</body></html>
